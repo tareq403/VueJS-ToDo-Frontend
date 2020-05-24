@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container" id="app">
+    <div class="row vertical-center justify-content-center mt-50">
+      <div class="col-md-6 mx-auto">
+        <CreateToDo/>
+        <ListToDo/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CreateToDo from "./components/CreateToDo"
+import ListToDo from "./components/ListToDo";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CreateToDo, ListToDo
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  @import "node_modules/bootstrap/scss/bootstrap";
+  @import "node_modules/bootstrap-vue/src/index.scss";
+
+  .vertical-center {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .todo_row {
+    width: 400px;
+  }
 </style>
