@@ -1,12 +1,12 @@
 <template>
     <div class="col align-self-center">
-        <h3 class="pb-5 text-center underline">Create new Todo</h3>
+        <h3 class="pb-5 text-center underline">Update Todo</h3>
         <form class="sign-in" @submit.prevent>
             <div class="form-group todo_row">
                 <input
                         type="text"
                         class="form-control"
-                        placeholder="What is in your mind?"
+                        placeholder="Title"
                         v-model="name"
                 />
                 <textarea
@@ -16,28 +16,51 @@
                 ></textarea>
             </div>
         </form>
-        <a class="btn btn-primary" @click="addToDo()">Save Todo</a>
+        <a class="btn btn-primary" @click="updateToDo()">Save Todo</a>
     </div>
 </template>
 
 <script>
     export default {
-        name: "CreateToDo",
+        name: "EditToDo",
         data() {
             return {
-                name: "",
-                details: ""
+                id: "",
+                name: "Loading",
+                details: "Loading",
+                done: false,
+                doneLoading: false
             }
         },
+        mounted() {
+            console.log("Edit mounted.")
+            this.id = this.$route.params.id;
+            console.log("Id found: " + this.id);
+            this.fetchToDo(this.id);
+        },
         methods: {
-            addToDo() {
+            fetchToDo(id) {
+                this.$http
+                    .get(`/${id}`)
+                    .then(response => {
+                        this.name = response.data.name;
+                        this.details = response.data.details;
+                        this.done = response.data.done;
+                        this.doneLoading = true;
+                    })
+            },
+            updateToDo() {
+                if (!this.doneLoading) {
+                    return;
+                }
                 let todo = {
                     name: this.name,
-                    "details": this.details,
+                    details: this.details,
                     done: false
                 };
+                let id = this.id;
                 this.$http
-                    .post("/", todo)
+                    .put(`/${id}`, todo)
                     .then(() => {
                         this.goToList();
                     })

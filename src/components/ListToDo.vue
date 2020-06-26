@@ -1,5 +1,6 @@
 <template>
     <div v-show="toDos.length>0" class="col align-self-center">
+        <h3 class="pb-5 text-center underline">Your Todo List</h3>
         <div class="form-row align-items-center" v-for="toDo in toDos" v-bind:key="toDo.id">
             <div class="col-auto my-1">
                 <div class="input-group mb-3 todo_row">
@@ -20,6 +21,7 @@
                             class="form-control"
                             :class="toDo.done?'todo_done':''"
                             v-model="toDo.name"
+                            @click="editToDo(toDo)"
                             @keypress="toDo.editing=true"
                             @keyup.enter="updateToDo(toDo)"
                     />
@@ -37,6 +39,7 @@
                 </div>
             </div>
         </div>
+        <router-link to="/create">Create New</router-link>
     </div>
 </template>
 
@@ -69,6 +72,10 @@
                 this.$http.get("/").then(response => {
                     this.toDos = response.data;
                 })
+            },
+            editToDo(todo) {
+              let id = todo.id;
+              this.$router.push({name: "EditToDo", params: {id: id}});
             },
             updateToDo(todo) {
                 let id = todo.id;
