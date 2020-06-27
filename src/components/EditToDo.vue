@@ -14,9 +14,14 @@
                         placeholder="Details"
                         v-model="details"
                 ></textarea>
+                <input
+                        type="submit"
+                        class="btn btn-primary"
+                        value="Save Todo"
+                        @click="updateToDo()"
+                />
             </div>
         </form>
-        <a class="btn btn-primary" @click="updateToDo()">Save Todo</a>
     </div>
 </template>
 
@@ -26,8 +31,8 @@
         data() {
             return {
                 id: "",
-                name: "Loading",
-                details: "Loading",
+                name: "Loading...",
+                details: "Loading...",
                 done: false,
                 doneLoading: false
             }

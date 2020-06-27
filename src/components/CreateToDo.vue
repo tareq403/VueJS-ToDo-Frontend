@@ -6,7 +6,7 @@
                 <input
                         type="text"
                         class="form-control"
-                        placeholder="What is in your mind?"
+                        placeholder="Title"
                         v-model="name"
                 />
                 <textarea
@@ -14,9 +14,14 @@
                         placeholder="Details"
                         v-model="details"
                 ></textarea>
+                <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Save Todo"
+                    @click="addToDo()"
+                />
             </div>
         </form>
-        <a class="btn btn-primary" @click="addToDo()">Save Todo</a>
     </div>
 </template>
 

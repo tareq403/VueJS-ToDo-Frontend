@@ -27,4 +27,8 @@
     .todo_row {
         width: 400px;
     }
+
+    .form-control {
+        margin-bottom: 10px;
+    }
 </style>
