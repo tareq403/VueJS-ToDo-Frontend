@@ -517,3 +517,6 @@ Run the following command in the terminal to run the project:
 npm run build
 ```
 
+This is the result:
+
+![](demo.gif)
